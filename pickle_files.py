@@ -1,20 +1,29 @@
 import pickle
+import Character
 
-class FileManager():
+def filesave(data):
+    try:
+        f = open(data.id + '.pickle', 'xb')
+    except FileExistsError:
+        f = open(data.id + '.pickle', 'wb')
+    pickle.dump(data, f)
+    f.close()
 
-    @staticmethod
-    def filesave(data):
-        with open('ids.pickle', 'wb') as f:
-            pickle.dump(data, f)
-        f.close()
-        print ('Succesfully saved')
-
-    @staticmethod
-    def fileload(id):
-        with open('ids.pickle', 'rb') as f:
+def fileload(id):
+    try:
+            f = open(id +'.pickle', 'rb')
             data = pickle.load(f)
-            if data.id == id:
-                f.close()
-                return data
-            else:
-                return False
+            f.close()
+            return data
+    except FileNotFoundError:
+        ch = input('No account. (R)etry or (C)reate new\n')
+        if ch == 'R' or ch == 'r':
+            return 'R'
+        elif ch == 'C' or ch == 'c':
+            data = Character.Character(id)
+            print('User created. Saving.')
+            filesave(data)
+            return data
+        else:
+            print('Wrong input')
+            return 'R'
