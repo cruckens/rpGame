@@ -1,5 +1,5 @@
 import pickle
-import Character
+import character
 
 def filesave(data):
     try:
@@ -20,7 +20,7 @@ def fileload(id):
         if ch == 'R' or ch == 'r':
             return 'R'
         elif ch == 'C' or ch == 'c':
-            data = Character.Character(id)
+            data = character.Character(id)
             print('User created. Saving.')
             filesave(data)
             return data

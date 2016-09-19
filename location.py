@@ -1,14 +1,12 @@
-import NPC
-
 class Location(object):
 
-    def __init__(self, name, level, type, exits = ''):
+    def __init__(self, name, level, type, description, exits = ''):
         self.name = name
         self.__level = level
-        self.__description = 'No description'
+        self.__description = description
         self.__exits = exits.split(',')
         self.__type = type
-#        self.population = NPC.getPopulation(self.name)
+        self.population = 0
 
     def __str__(self):
         if self.__type == 'City':
@@ -18,7 +16,6 @@ class Location(object):
 
     def setDescription(self, string):
         self.__description_ = string
-        return self
 
     def getType(self):
         return self.__type
@@ -26,3 +23,7 @@ class Location(object):
     def getExits(self):
             return self.__exits
 
+    def showFeatues(self):
+        if self.__type == 'City':
+            a = input()
+            #visit shops method call, any activity with npc etc
